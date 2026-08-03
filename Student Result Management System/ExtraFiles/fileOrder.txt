@@ -1,0 +1,27 @@
+STUDENT MANAGEMENT SYSTEM - FILE ORDER
+========================================
+
+1. database.py
+   - Data layer: StudentDatabase class (load/save/CRUD on students_data.json)
+   - No dependencies on other project files
+
+2. logic.py
+   - Business logic: calculate_result, get_grade, get_ranking
+   - No dependencies on other project files
+
+3. ui_helpers.py
+   - Console helpers: clear_screen, pause, print_header, get_valid_marks_input
+   - No dependencies on other project files
+
+4. actions.py
+   - Menu action handlers: add/view/search/update/delete/report/rank
+   - Depends on: logic.py, ui_helpers.py
+
+5. main.py
+   - Entry point: menu loop and dispatch
+   - Depends on: database.py, ui_helpers.py, actions.py
+   - Run this file to start the program: python3 main.py
+
+6. students_data.json
+   - Sample data file (50 students)
+   - Loaded automatically by database.py when placed in the same folder

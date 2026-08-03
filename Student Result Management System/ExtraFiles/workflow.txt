@@ -1,0 +1,74 @@
+STUDENT MANAGEMENT SYSTEM - WORKFLOW
+======================================
+
+PROGRAM START
+-------------
+main.py -> main()
+  -> StudentDatabase() created        [database.py]
+  -> loads students_data.json into memory (if it exists)
+
+MAIN LOOP (repeats until Exit)
+-------------------------------
+  1. clear_screen()                   [ui_helpers.py]
+  2. print MENU
+  3. user enters choice (1-8)
+  4. clear_screen()
+  5. dispatch to matching action       [actions.py]
+  6. pause()                          [ui_helpers.py]
+  7. loop back to step 1
+
+MENU OPTIONS -> ACTION -> WHAT HAPPENS
+----------------------------------------
+
+1. Add Student        -> action_add_student(db)
+     - input roll_no, name
+     - get_valid_marks_input()         [ui_helpers.py]
+     - db.add_student() -> saves to students_data.json
+
+2. View All Students   -> action_view_all(db)
+     - db.all_students()
+     - calculate_result() for each     [logic.py]
+     - prints table
+
+3. Search Student      -> action_search(db)
+     - by roll number: db.get_student()
+     - by name: db.search_by_name()
+     - show_student_detail() for matches
+
+4. Update Student      -> action_update(db)
+     - db.get_student()
+     - update name and/or marks
+     - db.update_name() / db.update_marks() -> saves
+
+5. Delete Student      -> action_delete(db)
+     - db.get_student()
+     - confirm (y/n)
+     - db.delete_student() -> saves
+
+6. Generate Report Card -> action_report_card(db)
+     - db.get_student()
+     - calculate_result()              [logic.py]
+     - get_ranking() to find class rank [logic.py]
+     - prints formatted report card
+
+7. View Class Ranking  -> action_ranking(db)
+     - get_ranking(db)                 [logic.py]
+       -> calculate_result() for every student
+       -> sorted by percentage, descending
+     - prints ranked table
+
+8. Exit
+     - prints goodbye message, breaks loop
+
+DATA FLOW
+---------
+students_data.json  <-->  StudentDatabase (database.py)
+                              |
+                              v
+                    actions.py (reads/writes via db)
+                              |
+                              v
+                    logic.py (pure calculations, no I/O)
+                              |
+                              v
+                    ui_helpers.py (all printing/input)

@@ -1,0 +1,8 @@
+student_management/
+├── main.py              # entry point — run this
+├── database.py          # StudentDatabase class (persistence)
+├── logic.py             # calculate_result, get_grade, get_ranking
+├── ui_helpers.py        # clear_screen, pause, print_header, get_valid_marks_input
+├── actions.py           # menu action handlers
+├── students_data.json   # 50 sample students
+└── file_order.txt       # dependency order notes
